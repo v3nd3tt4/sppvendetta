@@ -65,9 +65,9 @@
                         <?php $this->load->view('admin/sidebar') ?>
                         <!-- /menu footer buttons -->
                         <div class="sidebar-footer hidden-small">
-                            <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <!-- <a data-toggle="tooltip" data-placement="top" title="Settings">
                                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                            </a>
+                            </a> -->
                             <a data-toggle="tooltip" data-placement="top" title="FullScreen">
                                 <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                             </a>
@@ -145,13 +145,13 @@
                         <?php isset($main) ? $this->load->view($main) : null; ?>
 
                         <!-- footer content -->
-                        <footer class="bottom">
+                        <!-- <footer class="bottom">
                             <div class="">
                                 <p class="pull-right">&copy; <?php echo pretty_date(date('Y-m-d'), 'Y',FALSE) ?> Content Management System
                                 </p>
                             </div>
                             <div class="clearfix"></div>
-                        </footer>
+                        </footer> -->
                         <!-- /footer content -->
 
                     </div>

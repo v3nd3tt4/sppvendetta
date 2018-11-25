@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>CMS <?php echo isset($title) ? ' | ' . $title : null; ?></title>
+        <title>Sistem Informasi Pembayaran SPP</title>
         <link rel="icon" href="<?php echo media_url('ico/favicon.jpg'); ?>" type="image/x-icon">
 
         <!-- Bootstrap core CSS -->
@@ -64,7 +64,7 @@
 
                         <?php $this->load->view('admin/sidebar') ?>
                         <!-- /menu footer buttons -->
-                        <div class="sidebar-footer hidden-small">
+                        <!-- <div class="sidebar-footer hidden-small">
                             <a data-toggle="tooltip" data-placement="top" title="Settings">
                                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                             </a>
@@ -79,7 +79,7 @@
                             <a onclick="document.getElementById('formLogout').submit()" type="submit" data-toggle="tooltip" data-placement="top" title="Logout">
                                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                             </a>
-                        </div>
+                        </div> -->
                         <!-- /menu footer buttons -->
                     </div>
                 </div>
@@ -110,10 +110,11 @@
                                         <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                        <li><a href="<?php echo site_url('admin/dashboard') ?>">  Home</a>
+                                        <!-- <li><a href="<?php echo site_url('admin/dashboard') ?>">  Home</a>
                                         </li>
                                         <li><a href="<?php echo site_url('admin/profile') ?>">  Profile</a>
-                                        </li>
+                                        </li> -->
+                                        <li>&nbsp;</li>
                                         <li>
                                         <center>
                                             <input type="hidden" name="location" value="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
@@ -121,14 +122,11 @@
                                                 <i class="fa fa-sign-out pull-right"></i> Log out
                                             </button>
                                         </center>  
+                                        </li>
+                                        <li>&nbsp;</li>
+                                    </ul>
                                 </li>
                             </ul>
-                            </li>
-
-                            <li role="presentation" class="dropdown">
-
-
-                                </ul>
                         </nav>
                     </div>
 

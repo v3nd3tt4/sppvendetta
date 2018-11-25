@@ -1,4 +1,4 @@
-<!-- sidebar menu -->
+<!--sidebar menu -->
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
     <div class="menu_section">
@@ -25,6 +25,16 @@
             </li>
         </ul>
         <ul class="nav side-menu">
+            <li><a><i class="fa fa-users"></i> Jenis Pembayaran <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo site_url('admin/siswa') ?>">Daftar Jenis Pembayaran</a>
+                    </li>
+                    <!-- <li><a href="<?php echo site_url('admin/siswa') ?>">Detail Jenis Pembayaran</a>
+                    </li> -->
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav side-menu">
             <li><a><i class="fa fa-money"></i> Pembayaran <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('admin/trx_spp') ?>">Pembayaran SPP</a>
@@ -35,14 +45,14 @@
             </li>
         </ul>         
         
-        <ul class="nav side-menu">
+        <!-- <ul class="nav side-menu">
             <li><a><i class="fa fa-user-md"></i> User Management <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo site_url('admin/user') ?>">List User</a>
                     </li>
                 </ul>
             </li>
-        </ul>
+        </ul> -->
     </div>
 </div>
-<!-- /sidebar menu -->
+<!-- /sidebar menu
