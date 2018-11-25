@@ -11,7 +11,7 @@
         <ul class="nav side-menu">
             <li><a><i class="fa fa-calendar"></i> Tahun Ajaran <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('admin/thn_ajaran') ?>">List Tahun Ajaran</a>
+                    <li><a href="<?php echo base_url()?>admin">List Tahun Ajaran</a>
                     </li>
                 </ul>
             </li>
@@ -19,7 +19,7 @@
         <ul class="nav side-menu">
             <li><a><i class="fa fa-users"></i> Siswa <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('admin/siswa') ?>">Daftar Siswa</a>
+                    <li><a href="<?php echo base_url() ?>siswa">Daftar Siswa</a>
                     </li>
                 </ul>
             </li>
@@ -27,7 +27,7 @@
         <ul class="nav side-menu">
             <li><a><i class="fa fa-users"></i> Jenis Pembayaran <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo site_url('admin/siswa') ?>">Daftar Jenis Pembayaran</a>
+                    <li><a href="<?php echo base_url() ?>">Daftar Jenis Pembayaran</a>
                     </li>
                     <!-- <li><a href="<?php echo site_url('admin/siswa') ?>">Detail Jenis Pembayaran</a>
                     </li> -->
