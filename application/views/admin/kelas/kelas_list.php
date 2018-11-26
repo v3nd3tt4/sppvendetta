@@ -13,7 +13,7 @@
         <br>
 
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped datatable">
                 <thead class="gradient">
                     <tr>
                         <th>No</th>

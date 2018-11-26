@@ -23,11 +23,13 @@
 
         <!-- Custom styling plus plugins -->
         <link href="<?php echo media_url() ?>/css/custom.css" rel="stylesheet">
-
+        <link href="<?php echo media_url(); ?>/dataTable/media/css/dataTables.bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo media_url(); ?>/dataTable/media/css/jquery.dataTables.min.css" rel="stylesheet">
         <script src="<?php echo media_url() ?>/js/jquery.min.js"></script>
         <script src="<?php echo media_url(); ?>/js/angular.min.js"></script>
         <script src="<?php echo media_url(); ?>/js/mm.js"></script>
-
+        <script src="<?php echo media_url(); ?>/dataTable/media/js/jquery.dataTables.min.js"></script>
+        <script src="<?php echo media_url(); ?>/dataTable/media/js/dataTables.bootstrap.min.js"></script>
         <!--[if lt IE 9]>
             <script src="../assets/js/ie8-responsive-file-warning.js"></script>
             <![endif]-->
@@ -39,6 +41,9 @@
             <![endif]-->
 
         <script type="text/javascript">
+            $(document).ready(function(){
+                $('.datatable').DataTable();
+            });
             var BASEURL = '<?php echo base_url() ?>';
         </script>
 
@@ -56,7 +61,7 @@
                     <div class="left_col scroll-view">
 
                         <div class="navbar nav_title" style="border: 0;">
-                            <a href="<?php echo site_url('admin') ?>" class="site_title"><i class="fa fa-windows"></i> <span>ADMIN</span></a>
+                            <a href="<?php echo site_url('admin') ?>" class="site_title"><i class="fa fa-windows"></i> <span>Aplikasi SPP</span></a>
                         </div>
                         <div class="clearfix"></div>
 
@@ -140,6 +145,7 @@
                         <?php isset($main) ? $this->load->view($main) : null; ?>
 
                         <!-- footer content -->
+<!--
                         <footer class="bottom">
                             <div class="">
                                 <p class="pull-right">&copy; <?php echo pretty_date(date('Y-m-d'), 'Y',FALSE) ?> Content Management System
@@ -147,6 +153,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </footer>
+-->
                         <!-- /footer content -->
 
                     </div>

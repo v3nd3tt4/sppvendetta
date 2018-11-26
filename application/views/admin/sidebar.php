@@ -17,7 +17,7 @@
             </li>
         </ul>        
         <ul class="nav side-menu">
-            <li><a><i class="fa fa-users"></i> Kelas <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-building"></i> Kelas <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo base_url() ?>kelas">List Kelas</a>
                     </li>
@@ -25,9 +25,9 @@
             </li>
         </ul>
         <ul class="nav side-menu">
-            <li><a><i class="fa fa-users"></i> Jenis Pembayaran <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-credit-card"></i> Jenis Pembayaran <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo base_url() ?>jenis_pembayaran">Daftar Jenis Pembayaran</a>
+                    <li><a href="<?php echo base_url() ?>jenis_pembayaran">List Jenis Pembayaran</a>
                     </li>
                     <!-- <li><a href="<?php echo site_url('admin/siswa') ?>">Detail Jenis Pembayaran</a>
                     </li> -->
