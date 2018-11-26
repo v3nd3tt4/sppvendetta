@@ -25,6 +25,16 @@
             </li>
         </ul>
         <ul class="nav side-menu">
+            <li><a><i class="fa fa-users"></i> Jenis Pembayaran <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo base_url() ?>jenis_pembayaran">Daftar Jenis Pembayaran</a>
+                    </li>
+                    <!-- <li><a href="<?php echo site_url('admin/siswa') ?>">Detail Jenis Pembayaran</a>
+                    </li> -->
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav side-menu">
             <li><a><i class="fa fa-users"></i> Siswa <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo base_url() ?>siswa">Daftar Siswa</a>
@@ -32,16 +42,7 @@
                 </ul>
             </li>
         </ul>
-        <ul class="nav side-menu">
-            <li><a><i class="fa fa-users"></i> Jenis Pembayaran <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo base_url() ?>">Daftar Jenis Pembayaran</a>
-                    </li>
-                    <!-- <li><a href="<?php echo site_url('admin/siswa') ?>">Detail Jenis Pembayaran</a>
-                    </li> -->
-                </ul>
-            </li>
-        </ul>
+        
         <ul class="nav side-menu">
             <li><a><i class="fa fa-money"></i> Pembayaran <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">

@@ -33,10 +33,14 @@ DROP TABLE IF EXISTS `tb_jenis_pembayaran`;
 CREATE TABLE `tb_jenis_pembayaran` (
   `id_jenis_pembayaran` int(11) NOT NULL AUTO_INCREMENT,
   `nama_jenis_pembayaran` varchar(255) DEFAULT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_jenis_pembayaran`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_jenis_pembayaran` */
+
+insert  into `tb_jenis_pembayaran`(`id_jenis_pembayaran`,`nama_jenis_pembayaran`,`keterangan`) values 
+(2,'ddcc edit',' vvv edit');
 
 /*Table structure for table `tb_kelas` */
 
@@ -50,9 +54,6 @@ CREATE TABLE `tb_kelas` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tb_kelas` */
-
-insert  into `tb_kelas`(`id_kelas`,`nama_kelas`,`keterangan`) values 
-(2,'edit kelas','ds edit');
 
 /*Table structure for table `tb_set_daftar_ulang` */
 

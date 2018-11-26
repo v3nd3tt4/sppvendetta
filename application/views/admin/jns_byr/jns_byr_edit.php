@@ -6,14 +6,15 @@
       </div>
       <!-- /.col-lg-12 -->
       <div class="col-md-12">
-         <form method="POST" action="<?=base_url()?>jenis_pembayaran/store">
+         <form method="POST" action="<?=base_url()?>jenis_pembayaran/update">
             <div class="form-group">
                <label >Nama Jenis Pembayaran *</label>
-               <input type="text" name="nama_jenis_pembayaran" class="form-control" value="" required>
+                <input type="hidden" name="id_jenis_pembayaran" value="<?=$jenis_pembayaran->row()->id_jenis_pembayaran?>"/>
+               <input type="text" name="nama_jenis_pembayaran" class="form-control" value="<?=$jenis_pembayaran->row()->nama_jenis_pembayaran?>" required>
             </div>
             <div class="form-group">
                <label >Keterangan *</label>
-               <input type="text" name="keterangan" class="form-control" value="">
+               <input type="text" name="keterangan" class="form-control" value="<?=$jenis_pembayaran->row()->keterangan?>">
             </div>
          
              <small>
