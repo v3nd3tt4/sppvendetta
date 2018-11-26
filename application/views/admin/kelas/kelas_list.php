@@ -1,56 +1,58 @@
 <div class="col-md-12 col-sm-12 col-xs-12 main post-inherit">
     <div class="x_panel post-inherit">
         <h3 class="">
-            Daftar Kelas
-            <a href="<?php echo site_url('admin/kelas/add'); ?>" ><span class="glyphicon glyphicon-plus-sign"></span></a>
-        </h3><br>
+            Kelas
+            <a href="<?php echo base_url('kelas/add'); ?>" ><span class="glyphicon glyphicon-plus-sign"></span></a>
+        </h3>
+        <br>
+<!--
         <span class="pull-right">
             <a class="btn btn-sm btn-default" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" ><span class="glyphicon glyphicon-align-justify"></span></a>               
         </span>
-    </h3>       
-</h3>
+-->
+        <br>
 
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead class="gradient">
-            <tr>
-                <th>No</th>
-                <th>Kelas</th>
-                <th>Tarif SPP</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <?php		
-        $i=1;		
-        if (!empty($kelas)) {
-            foreach ($kelas as $row) {
-                ?>
-                <tbody>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="gradient">
                     <tr>
-                        <td ><?php echo $i ?></td>
-                        <td ><?php echo $row['kelas_ket']; ?></td>
-                        <td ><?php echo $row['kelas_tarif']; ?></td>
-                        <td>
-                            <a class="btn btn-success btn-xs" href="<?php echo site_url('admin/kelas/edit/' . $row['kelas_id']); ?>" ><span class="glyphicon glyphicon-edit"></span></a>
-                            </td>
-                        </tr>
-                    </tbody> <?php $i++;?>
-                    <?php
-                }
-            } else {
-                ?>
-                <tbody>
-                    <tr id="row">
-                        <td colspan="5" align="center">Data Kosong</td>
+                        <th>No</th>
+                        <th>Nama Kelas</th>
+                        <th>Keteragan</th>
+                        <th>Aksi</th>
                     </tr>
-                </tbody> 
-                <?php 
-            }
-            ?>   
-        </table>
+                </thead>
+                <tbody>
+                <?php		
+                $i=1;		
+                if (!empty($thn_ajaran)) {
+                    foreach ($thn_ajaran as $row) {
+                        ?>
+                        
+                            <tr>
+                                <td ><?php echo $i ?>.</td>
+                                <td ><?php echo $row->nama_kelas; ?></td>
+                                <td ><?php echo $row->keterangan; ?></td>
+                                <td>
+                                    <a class="btn btn-success btn-xs" href="<?php echo base_url('kelas/edit/' . $row->id_kelas); ?>" ><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a class="btn btn-danger btn-xs" href="<?php echo base_url('kelas/remove/' . $row->id_kelas); ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" ><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                             <?php $i++;?>
+                            <?php
+                        }
+                    } else {
+                        ?>
+                        
+                            <tr id="row">
+                                <td colspan="5" align="center">Data Kosong</td>
+                            </tr>
+                        <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    
     </div>
-    <div >
-        <?php echo $this->pagination->create_links(); ?>
-    </div>
-</div>
 </div>
