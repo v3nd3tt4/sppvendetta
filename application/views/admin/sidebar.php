@@ -46,6 +46,8 @@
         <ul class="nav side-menu">
             <li><a><i class="fa fa-money"></i> Pembayaran <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo base_url('pembayaran/setting_pembayaran_spp') ?>">Setting Pembayaran SPP</a>
+                    </li>
                     <li><a href="<?php echo site_url('admin/trx_spp') ?>">Pembayaran SPP</a>
                     </li>
                     <li><a href="<?php echo site_url('admin/jns_byr') ?>">Jenis Pembayaran</a>
