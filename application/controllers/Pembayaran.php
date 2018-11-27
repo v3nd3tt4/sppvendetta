@@ -158,4 +158,19 @@ class Pembayaran extends CI_Controller {
         $this->load->view('layout', $data);
     }
     
+    public function lihat_bayar_tansaksi($id_set_spp, $id_siswa){
+        $query = $this->Model->get_data('tb_set_spp', array('id_set_spp' => $id_set_spp));
+        $querysiswa = $this->Model->kueri("select * from tb_siswa join tb_kelas on tb_siswa.id_kelas = tb_kelas.id_kelas where tb_siswa.id_siswa = '$id_siswa'");
+        $query2 = $this->Model->kueri("select * from tb_transaksi_pembayaran_spp where tb_transaksi_pembayaran_spp.id_set_spp = '$id_set_spp' and tb_transaksi_pembayaran_spp.id_siswa = '$id_siswa'");
+//        $query2 = $this->Model->get_data('tb_transaksi_pembayaran_spp', array('id_set_spp' => $id_set_spp));
+        $data = array(
+            'main' => 'admin/pembayaran/detail_transaksi_spp',
+            'set_spp' => $query,
+            'list_transaksi' => $query2,
+            'kelas' => $this->Model->list_data_all('tb_kelas'),
+            'siswa' => $querysiswa
+        );
+        $this->load->view('layout', $data);
+    }
+    
 }
