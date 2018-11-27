@@ -171,7 +171,11 @@
 
             <script src="<?php echo media_url() ?>/js/custom.js"></script>
             <script src="<?php echo media_url() ?>/js/jquery.nicescroll.min.js"></script>
-
+            <script>
+                $(document).ready(function(e){
+                    $(document).on('click', '')
+                });
+            </script>
 
     </body>
 
