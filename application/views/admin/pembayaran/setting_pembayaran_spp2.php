@@ -49,7 +49,7 @@
       
       <!-- /.col-lg-12 -->
       <div class="col-md-12">
-         <table class="table table-stripped">
+         <table class="table table-stripped datatable">
              <thead>
                 <tr>
                     <th>No</th>
