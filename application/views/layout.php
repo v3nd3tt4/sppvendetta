@@ -43,6 +43,34 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 $('.datatable').DataTable();
+                $(document).on('click', '.btn_bayar_transaksi', function(e){
+                    e.preventDefault();
+                    //alert('danger');
+                    var id = $(this).attr('id');
+                    $('#modal_pembayaran').modal();
+                    $.ajax({
+                        url : '<?=base_url()?>pembayaran/getkwitansi',
+                        type: 'POST',
+                        data: 'id='+id,
+                        success: function(msg){
+                            $('#result_pembayaran').html(msg);
+                        }
+
+                    });
+                });
+                $(document).on('submit', '#form_transaksi_pembayaran_spp', function(e){
+                    e.preventDefault();
+                    $('#notif_transaksi_pembayaran_spp').html('Loading...');
+                    var data = $('#form_transaksi_pembayaran_spp').serialize();
+                    $.ajax({
+                        url : '<?=base_url()?>pembayaran/proses_pemabayaran_spp',
+                        type: 'POST',
+                        data: data,
+                        success: function(msg){
+                            $('#notif_transaksi_pembayaran_spp').html(msg);
+                        }
+                    });
+                });
             });
             var BASEURL = '<?php echo base_url() ?>';
         </script>

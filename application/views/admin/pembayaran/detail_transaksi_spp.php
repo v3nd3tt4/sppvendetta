@@ -55,6 +55,8 @@
                     <th>Tahun</th>
                     <th>No Kwitansi</th>
                     <th>Tanggal Transaksi</th>
+                    <th>Kewajiban</th>
+                    <th>Jumlah Bayar</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
@@ -67,12 +69,14 @@
                     <td><?=$row_list_transaksi->tahun?></td>
                     <td><?=$row_list_transaksi->no_kwitansi === NULL || $row_list_transaksi->no_kwitansi == ''  ? '<a class="btn btn-danger btn-xs" href="#">Belum Ada</a>' : $row_list_transaksi->no_kwitansi?></td>
                     <td><?=$row_list_transaksi->tanggal_transaksi?></td>
+                    <td>Rp. <?=number_format($row_list_transaksi->nominal_default)?></td>
+                    <td>Rp. <?=number_format($row_list_transaksi->jumlah_bayar)?></td>
                     <td><?=$row_list_transaksi->status?></td>
                     <td>
                         <?php if($row_list_transaksi->status == 'belum bayar'){?>
                         <a href="#" class="btn btn-success btn-xs btn_bayar_transaksi" id="<?=$row_list_transaksi->id_transaksi_spp?>">Lakukan Pembayaran</a>
                         <?php }else{?>
-                        <a href="#" class="btn btn-primary btn-xs btn_bayar_transaksi" id="<?=$row_list_transaksi->id_transaksi_spp?>"><i class="fa fa-check" aria-hidden="true"></i> Lunas</a>
+                        <a href="#" class="btn btn-primary btn-xs" id="<?=$row_list_transaksi->id_transaksi_spp?>"><i class="fa fa-check" aria-hidden="true"></i> Lunas</a>
                         <?php }?>
                     </td>
                 </tr>
@@ -81,4 +85,25 @@
          </table>
       </div>
    </div>
+</div>
+
+<!-- Modal -->
+<div id="modal_pembayaran" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Transaksi</h4>
+      </div>
+      <div class="modal-body">
+        <div id="result_pembayaran"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
 </div>

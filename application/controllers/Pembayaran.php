@@ -172,5 +172,33 @@ class Pembayaran extends CI_Controller {
         );
         $this->load->view('layout', $data);
     }
+
+    public function getkwitansi(){
+        $id = $this->input->post('id', true);
+        $acak = rand(10, 99);
+        $nokwitansi =  date('YmdHis').$acak;
+        $query = $this->Model->get_data('tb_transaksi_pembayaran_spp', array('id_transaksi_spp' => $id));
+        $data = array(
+            // 'main' => 'transaksi_bayar_spp',
+            'row' => $query,
+            'no_kwitansi' => $nokwitansi,
+        );
+        $this->load->view('transaksi_bayar_spp', $data);
+    }
+
+    public function proses_pemabayaran_spp(){
+        $data = array(
+            'no_kwitansi' => $this->input->post('no_kwitansi'),
+            'jumlah_bayar' => $this->input->post('nominal_bayar'),
+            'tanggal_transaksi' => date('Y-m-d H:i:s'),
+            'status' => 'sudah bayar'
+        );
+        $update = $this->Model->update_data('tb_transaksi_pembayaran_spp', $data, array('id_transaksi_spp' => $this->input->post('id_transaksi_spp')));
+        if($update){
+            echo '<script>alert("data berhasil disimpan");location.reload();</script>';
+        }else{
+            echo '<script>alert("data gagal disimpan");location.reload();</script>';
+        }
+    }
     
 }
