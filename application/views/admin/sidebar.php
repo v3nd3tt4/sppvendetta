@@ -48,7 +48,7 @@
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo base_url('pembayaran/setting_pembayaran_spp') ?>">Pembayaran SPP</a>
                     </li>
-                    <li><a href="<?php echo site_url('admin/jns_byr') ?>">Pembayaran Daftar Ulang</a>
+                    <li><a href="<?php echo base_url('pembayaran_daful') ?>">Pembayaran Daftar Ulang</a>
                     </li>
                 </ul>
             </li>

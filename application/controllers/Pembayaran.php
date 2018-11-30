@@ -28,7 +28,7 @@ class Pembayaran extends CI_Controller {
 		$data = array(
 			'main' => 'admin/pembayaran/setting_pembayaran_spp',
             'thn_ajaran' => $this->Model->list_data_all('tb_kelas'),
-            'set_spp' => $this->Model->kueri('select tb_set_spp.*, tb_jenis_pembayaran.nama_jenis_pembayaran from tb_set_spp join tb_jenis_pembayaran on tb_jenis_pembayaran.id_jenis_pembayaran = tb_set_spp.id_jenis_pembayaran')
+            'set_spp' => $this->Model->kueri('select tb_set_spp.*, tb_jenis_pembayaran.nama_jenis_pembayaran from tb_set_spp join tb_jenis_pembayaran on tb_jenis_pembayaran.id_jenis_pembayaran = tb_set_spp.id_jenis_pembayaran where tb_set_spp.id_jenis_pembayaran = "1"')
 		);
 		$this->load->view('layout', $data);
 	}
@@ -37,7 +37,7 @@ class Pembayaran extends CI_Controller {
         $data = array(
 			'main' => 'admin/pembayaran/setting_pembayaran_spp',
             'thn_ajaran' => $this->Model->list_data_all('tb_kelas'),
-            'set_spp' => $this->Model->kueri('select tb_set_spp.*, tb_jenis_pembayaran.nama_jenis_pembayaran from tb_set_spp join tb_jenis_pembayaran on tb_jenis_pembayaran.id_jenis_pembayaran = tb_set_spp.id_jenis_pembayaran')
+            'set_spp' => $this->Model->kueri('select tb_set_spp.*, tb_jenis_pembayaran.nama_jenis_pembayaran from tb_set_spp join tb_jenis_pembayaran on tb_jenis_pembayaran.id_jenis_pembayaran = tb_set_spp.id_jenis_pembayaran where tb_set_spp.id_jenis_pembayaran = "1"')
 		);
 		$this->load->view('layout', $data);
     }
