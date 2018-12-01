@@ -67,6 +67,7 @@ class Pembayaran_daful extends CI_Controller {
     		'sampai' => $this->input->post('sampai', true),
     		'id_kelas' => $this->input->post('kelas', true),
     		'max_angsuran' => $this->input->post('max_cicilan', true),
+    		'biaya_daful' => $this->input->post('biaya_daful', true),
     	);
     	$this->db->insert('tb_set_daftar_ulang', $data1);
     	$id_set_daftar_ulang = $this->db->insert_id();
@@ -115,6 +116,55 @@ class Pembayaran_daful extends CI_Controller {
             'kelas' => $this->Model->list_data_all('tb_kelas'),
 		);
 		$this->load->view('layout', $data);
+    }
+
+    public function transaksi_daful($id_siswa, $id_set_daftar_ulang){
+    	$query = $this->Model->get_data('tb_set_daftar_ulang', array('id_set_daftar_ulang' => $id_set_daftar_ulang));
+    	$query_siswa = $this->Model->get_data('tb_siswa', array('id_siswa' => $id_siswa));
+    	$data = array(
+    		'main' => 'admin/pembayaran_daful/transaksi_pembayaran_daful',
+			'row_data' => $query,
+            'list_siswa' => $query_siswa,  
+            'kelas' => $this->Model->list_data_all('tb_kelas'),
+            'transaksi_pembayaran_daful' => $this->Model->kueri("select * from tb_transaksi_pembayaran_daful where id_siswa = '$id_siswa' and id_set_daftar_ulang = '$id_set_daftar_ulang' order by id_transaksi_pembayaran_daful DESC")
+		);
+		$this->load->view('layout', $data);
+    }
+
+    public function getkwitansi(){
+        $id = $this->input->post('id', true);
+        $acak = rand(10, 99);
+        $nokwitansi =  date('YmdHis').$acak;
+        $pecah = explode('_', $id);
+        $id_siswa = $pecah[0];
+        $id_set_daftar_ulang = $pecah[1];
+        $query = $this->Model->get_data('tb_set_daftar_ulang', array('id_set_daftar_ulang' => $id_set_daftar_ulang));
+        $data = array(
+            // 'main' => 'transaksi_bayar_spp',
+            'row' => $query,
+            'id_siswa' => $id_siswa,
+            'id_set_daftar_ulang' => $id_set_daftar_ulang,
+            'no_kwitansi' => $nokwitansi,
+        );
+        $this->load->view('admin/pembayaran_daful/transaksi_bayar_daful', $data);
+    }
+
+    public function proses_pembayaran_daful(){
+    	$data = array(
+            'no_kwitansi' => $this->input->post('no_kwitansi'),
+            'jumlah_bayar' => $this->input->post('nominal_bayar'),
+            'tanggal_transaksi' => date('Y-m-d H:i:s'),
+            'status' => 'sudah bayar',
+            'id_siswa' => $this->input->post('id_siswa'),
+            'id_set_daftar_ulang' => $this->input->post('id_set_daftar_ulang')
+        );
+        $simpan = $this->Model->simpan_data($data, 'tb_transaksi_pembayaran_daful');
+        // $update = $this->Model->update_data('tb_transaksi_pembayaran_daful', $data, array('id_transaksi_pembayaran_daful' => $this->input->post('id_transaksi_spp')));
+        if($simpan){
+            echo '<script>alert("data berhasil disimpan");location.reload();</script>';
+        }else{
+            echo '<script>alert("data gagal disimpan");location.reload();</script>';
+        }
     }
 
 }

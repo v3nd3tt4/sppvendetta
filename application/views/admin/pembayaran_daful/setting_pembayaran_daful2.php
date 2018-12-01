@@ -33,6 +33,10 @@
                 <label>Maximal Cicilan</label>
                 <input type="number" name="max_cicilan" value="" class="form-control" required />
             </div>
+            <div class="form-group">
+                <label>Biaya Daftar Ulang</label>
+                <input type="number" name="biaya_daful" value="" class="form-control" required />
+            </div>
              <small>
              <i>*) Wajib diisi</i>
              </small>

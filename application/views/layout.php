@@ -71,6 +71,21 @@
                         }
                     });
                 });
+
+                $(document).on('submit', '#form_transaksi_pembayaran_daful', function(e){
+                    e.preventDefault();
+                    $('#notif_transaksi_pembayaran_daful').html('Loading...');
+                    var data = $('#form_transaksi_pembayaran_daful').serialize();
+                    $.ajax({
+                        url : '<?=base_url()?>pembayaran_daful/proses_pembayaran_daful',
+                        type: 'POST',
+                        data: data,
+                        success: function(msg){
+                            $('#notif_transaksi_pembayaran_daful').html(msg);
+                        }
+                    });
+                });
+
                 $(document).on('click', '.tambah_detail_daful', function(e){
                     e.preventDefault();
                     var id_detail_daful = $('#jenis_detail_daful').val();
@@ -87,6 +102,22 @@
                 $(document).on('click', '.btn_hapus_detail_daful', function(e){
                     e.preventDefault();
                     $(this).closest("tr").remove(); 
+                });
+
+                $(document).on('click', '.btn_bayar_transaksi_daful', function(e){
+                    e.preventDefault();
+                    var id = $(this).val();
+                    $('#result_pembayaran_daful').html('Loading...');
+                    $('#modal_pembayaran_daful').modal();
+                    $.ajax({
+                        url : '<?=base_url()?>pembayaran_daful/getkwitansi',
+                        type: 'POST',
+                        data: 'id='+id,
+                        success: function(msg){
+                            $('#result_pembayaran_daful').html(msg);
+                        }
+
+                    });
                 });
             });
             var BASEURL = '<?php echo base_url() ?>';
