@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label>Maximal Cicilan</label>
-                <input type="date" name="sampai" value="<?=$sampai?>" readonly class="form-control"/>
+                <input type="number" name="max_cicilan" value="" class="form-control" required />
             </div>
              <small>
              <i>*) Wajib diisi</i>
@@ -53,8 +53,9 @@
       
       <!-- /.col-lg-12 -->
       <div class="col-md-12">
+        <h4>Daftar Siswa</h4><hr/>
         <div class="table-responsive">
-         <table class="table table-stripped datatable">
+         <table class="table table-stripped">
              <thead>
                 <tr>
                     <th>No</th>
@@ -82,35 +83,32 @@
       
       <!-- /.col-lg-12 -->
       <div class="col-md-12">
-        
+          <h4>Daftar Detail Daful</h4><hr/>
           <div class="form-group">
             <label>Jenis:</label>
-            <select class="form-control" name="jenis">
+            <select class="form-control" name="jenis_detail_daful" id="jenis_detail_daful">
               <option value="">--pilih--</option>
+              <?php foreach($list_detail_daful as $row_detail_daful){?>
+              <option value="<?=$row_detail_daful->id_detail_daftar_ulang?>"><?=$row_detail_daful->nama_detail_pembayaran?></option>
+              <?php }?>
             </select>
           </div>
           <div class="form-group">
             <label>Biaya:</label>
-            <input class="form-control" name="biaya_detail_daful"/>
+            <input type="number" class="form-control" name="biaya_detail_daful" id="biaya_detail_daful" />
           </div>
-          <button class="btn btn-primary">Tambah</button>
+          <button type="button" class="btn btn-primary tambah_detail_daful">Tambah</button>
         <div class="table-responsive">
-         <table class="table table-stripped">
+         <table class="table table-stripped tb_list_detail_daful">
              <thead>
                 <tr>
-                    <th>No</th>
                     <th>Jenis</th>
                     <th>Biaya</th>
+                    <th></th>
                 </tr>
              </thead>
              <tbody>
-                 <?php $no=1;foreach($list_siswa->result() as $row_list_siswa){?>
-                <tr>
-                    <td><?=$no++;?>.</td>
-                    <td><?=$row_list_siswa->nis?><input type="hidden" name="id_siswa[]" value="<?=$row_list_siswa->id_siswa?>"></td>
-                    <td><?=$row_list_siswa->nama_siswa?></td>
-                </tr>
-                 <?php }?>
+                 
              </tbody>
          </table>
        </div>

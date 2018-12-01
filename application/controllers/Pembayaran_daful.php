@@ -54,7 +54,12 @@ class Pembayaran_daful extends CI_Controller {
             'sampai' => $sampai,
             'id_kelas' => $kelas,
             'list_siswa' => $this->Model->get_data('tb_siswa', array('id_kelas' => $kelas)),
+            'list_detail_daful' => $this->Model->list_data_all('tb_detail_daftar_ulang'),
 		);
 		$this->load->view('layout', $data);
+    }
+
+    public function store(){
+    	
     }
 }

@@ -71,6 +71,23 @@
                         }
                     });
                 });
+                $(document).on('click', '.tambah_detail_daful', function(e){
+                    e.preventDefault();
+                    var id_detail_daful = $('#jenis_detail_daful').val();
+                    var biaya_detail_daful = $('#biaya_detail_daful').val();
+                    var nama_detail_daful = $('#jenis_detail_daful').find(":selected").text();
+                    html = '';
+                    html += '<tr>';
+                    html += '<td><input type="hidden" name="id_detail_daful_plus[]" readonly type="text" value="'+id_detail_daful+'">'+nama_detail_daful+'</td>';
+                    html += '<td><input type="hidden" name="biaya_detail_daful_plus[]" readonly type="text" value="'+biaya_detail_daful+'">'+biaya_detail_daful+'</td>';
+                    html += '<td><button class="btn btn-xs btn-danger btn_hapus_detail_daful">hapus</button></td>';
+                    html += '</tr>';
+                    $('.tb_list_detail_daful tbody').append(html);
+                });
+                $(document).on('click', '.btn_hapus_detail_daful', function(e){
+                    e.preventDefault();
+                    $(this).closest("tr").remove(); 
+                });
             });
             var BASEURL = '<?php echo base_url() ?>';
         </script>

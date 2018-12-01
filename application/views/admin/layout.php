@@ -173,7 +173,9 @@
             <script src="<?php echo media_url() ?>/js/jquery.nicescroll.min.js"></script>
             <script>
                 $(document).ready(function(e){
-                    $(document).on('click', '')
+                    $(document).on('click', '.tambah_detail_daful', function(e){
+
+                    });
                 });
             </script>
 
