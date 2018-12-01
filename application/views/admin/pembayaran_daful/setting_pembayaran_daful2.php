@@ -29,6 +29,10 @@
                 <label>Sampai</label>
                 <input type="date" name="sampai" value="<?=$sampai?>" readonly class="form-control"/>
             </div>
+            <div class="form-group">
+                <label>Maximal Cicilan</label>
+                <input type="date" name="sampai" value="<?=$sampai?>" readonly class="form-control"/>
+            </div>
              <small>
              <i>*) Wajib diisi</i>
              </small>
@@ -44,11 +48,12 @@
       </div>
    </div>
 </div>
-<div class="col-md-8 col-sm-8 col-xs-8 main post-inherit">
+<div class="col-md-7 col-sm-7 col-xs-7 main post-inherit">
    <div class="x_panel post-inherit">
       
       <!-- /.col-lg-12 -->
       <div class="col-md-12">
+        <div class="table-responsive">
          <table class="table table-stripped datatable">
              <thead>
                 <tr>
@@ -67,6 +72,48 @@
                  <?php }?>
              </tbody>
          </table>
+       </div>
+      </div>
+   </div>
+</div>
+
+<div class="col-md-5 col-sm-5 col-xs-5 main post-inherit">
+   <div class="x_panel post-inherit">
+      
+      <!-- /.col-lg-12 -->
+      <div class="col-md-12">
+        
+          <div class="form-group">
+            <label>Jenis:</label>
+            <select class="form-control" name="jenis">
+              <option value="">--pilih--</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Biaya:</label>
+            <input class="form-control" name="biaya_detail_daful"/>
+          </div>
+          <button class="btn btn-primary">Tambah</button>
+        <div class="table-responsive">
+         <table class="table table-stripped">
+             <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Jenis</th>
+                    <th>Biaya</th>
+                </tr>
+             </thead>
+             <tbody>
+                 <?php $no=1;foreach($list_siswa->result() as $row_list_siswa){?>
+                <tr>
+                    <td><?=$no++;?>.</td>
+                    <td><?=$row_list_siswa->nis?><input type="hidden" name="id_siswa[]" value="<?=$row_list_siswa->id_siswa?>"></td>
+                    <td><?=$row_list_siswa->nama_siswa?></td>
+                </tr>
+                 <?php }?>
+             </tbody>
+         </table>
+       </div>
       </div>
    </div>
 </div>

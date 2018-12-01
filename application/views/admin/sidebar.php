@@ -29,8 +29,8 @@
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo base_url() ?>jenis_pembayaran">List Jenis Pembayaran</a>
                     </li>
-                    <!-- <li><a href="<?php echo site_url('admin/siswa') ?>">Detail Jenis Pembayaran</a>
-                    </li> -->
+                    <li><a href="<?php echo base_url() ?>detail_daful/list_detail_daful">Detail Jenis Pembayaran Daftar Ulang</a>
+                    </li>
                 </ul>
             </li>
         </ul>
