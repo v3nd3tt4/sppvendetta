@@ -43,18 +43,31 @@
 		<td><?=$row_transaksi_spp->nis?></td>
 		<td><?=$row_transaksi_spp->nama_siswa?></td>
 		<?php for($i=1;$i<=$tb_set_daful->row()->max_angsuran;$i++){?>
-		<?php $querylagi= $this->Model->get_data('tb_transaksi_pembayaran_daful', array('id_siswa' => $row_transaksi_spp->id_siswa, 'id_set_daftar_ulang' => $row_transaksi_spp->id_set_daftar_ulang)) ?>
-		<?php if($querylagi->num_rows() != 0){
-			foreach($querylagi->result() as $row_querylagi){?>
+		<?php $querylagi= $this->Model->get_data('tb_transaksi_pembayaran_daful', array('id_siswa' => $row_transaksi_spp->id_siswa, 'id_set_daftar_ulang' => $row_transaksi_spp->id_set_daftar_ulang)) ;
+			$hitung_loop = $querylagi->num_rows();
+			if($hitung_loop!= 10){
+				$cek_loop = 10 - $hitung_loop ;
+			}else{
+				$cek_loop = 10;
+			}
+		?>
+		<?php 
+			foreach($querylagi->result() as $row_querylagi){
+
+		?>
 		<td>Rp. <?=number_format($row_querylagi->jumlah_bayar)?></td>
 		<td><?=$row_querylagi->tanggal_transaksi?></td>
 		<?php } 
-		}else{
-			echo '<td></td>';
-			echo '<td></td>';
-		} //if ($i == 1) {
-        break;    /* You could also write 'break 1;' here. */
-    	}?>
+		 //if ($i == 1) {
+        
+        	for($i<1; $i<=$cek_loop;$i++){
+        		echo '<td></td><td></td>';
+        	}
+        	break;
+           /* You could also write 'break 1;' here. */
+    	}
+
+    	//echo '<td></td><td></td>'; ?>
 
 	</tr>
 	<?php }?>
