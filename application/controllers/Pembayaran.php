@@ -200,5 +200,21 @@ class Pembayaran extends CI_Controller {
             echo '<script>alert("data gagal disimpan");location.reload();</script>';
         }
     }
+
+    public function cetak_laporan_cicilan($id_set_spp){
+        $query = $this->Model->kueri("select * from tb_set_spp where id_set_spp = '$id_set_spp'");
+        $query2 = $this->Model->kueri("select * from tb_transaksi_pembayaran_spp join tb_siswa on tb_transaksi_pembayaran_spp.id_siswa = tb_siswa.id_siswa where id_set_spp = '$id_set_spp' group by tb_transaksi_pembayaran_spp.id_siswa");
+        $query4 = $this->Model->kueri("select * from tb_transaksi_pembayaran_spp join tb_siswa on tb_transaksi_pembayaran_spp.id_siswa = tb_siswa.id_siswa where id_set_spp = '$id_set_spp'");
+        $query3 = $this->Model->kueri("select count(*) as jumlah from tb_transaksi_pembayaran_spp join tb_siswa on tb_transaksi_pembayaran_spp.id_siswa = tb_siswa.id_siswa where id_set_spp = '$id_set_spp' group by tb_transaksi_pembayaran_spp.id_siswa limit 1");
+        $data = array(
+            'tb_set_spp' => $query,
+            'tb_transaksi_pembayaran_spp' => $query2,
+            'total' => $query3,
+            'loop_bln_thn' => $this->cek_month1($query->row()->dari, $query->row()->sampai),
+            'loop_siswa' => $query4 
+        );
+
+        $this->load->view('admin/pembayaran/laporan_cicilan', $data);
+    }
     
 }
