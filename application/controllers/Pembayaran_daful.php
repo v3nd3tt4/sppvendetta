@@ -28,7 +28,7 @@ class Pembayaran_daful extends CI_Controller {
 		$data = array(
 			'main' => 'admin/pembayaran_daful/dashboard',
             'thn_ajaran' => $this->Model->list_data_all('tb_kelas'),
-            'set_spp' => $this->Model->kueri('select tb_set_spp.*, tb_jenis_pembayaran.nama_jenis_pembayaran from tb_set_spp join tb_jenis_pembayaran on tb_jenis_pembayaran.id_jenis_pembayaran = tb_set_spp.id_jenis_pembayaran where tb_set_spp.id_jenis_pembayaran = "2"')
+            'set_spp' => $this->Model->list_data_all('tb_set_daftar_ulang'),
 		);
 		$this->load->view('layout', $data);
 	}
@@ -60,6 +60,62 @@ class Pembayaran_daful extends CI_Controller {
     }
 
     public function store(){
+    	$this->db->trans_begin();
+    	$data1 = array(
+    		'keterangan' => $this->input->post('keterangan', true),
+    		'dari' => $this->input->post('dari', true),
+    		'sampai' => $this->input->post('sampai', true),
+    		'id_kelas' => $this->input->post('kelas', true),
+    		'max_angsuran' => $this->input->post('max_cicilan', true),
+    	);
+    	$this->db->insert('tb_set_daftar_ulang', $data1);
+    	$id_set_daftar_ulang = $this->db->insert_id();
+    	// $id_set_daftar_ulang = 1;
+    	$data2 = array();
+    	for($i=0;$i<count($this->input->post('id_siswa', true));$i++){
+    		$data2[] = array(
+    			'id_set_daftar_ulang' => $id_set_daftar_ulang,
+    			'id_siswa' => $this->input->post('id_siswa', true)[$i]
+    		);
+    	}
+    	$this->db->insert_batch('tb_siswa_di_pembayaran_daful', $data2);
     	
+    	$data3 = array();
+    	for($i=0;$i<count($this->input->post('id_detail_daful_plus', true));$i++){
+    		$data3[] = array(
+    			'id_set_daftar_ulang' => $id_set_daftar_ulang,
+    			'id_detail_daftar_ulang' => $this->input->post('id_detail_daful_plus', true)[$i],
+    			'nominal_bayar' => $this->input->post('biaya_detail_daful_plus', true)[$i]
+    		);
+    	}
+    	$this->db->insert_batch('tb_detail_set_daftar_ulang', $data3);
+    	if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->trans_rollback();
+            echo '<script>alert("data gagal disimpan");window.history.back();</script>';
+        }
+        else
+        {
+            $this->db->trans_commit();
+            echo '<script>alert("data berhasil disimpan");window.location.href = "'.base_url().'pembayaran_daful";</script>';
+        }
     }
+
+    public function detail($id){
+    	$query = $this->Model->get_data('tb_set_daftar_ulang', array('id_set_daftar_ulang' => $id));
+
+    	$query_list_siswa = $this->Model->kueri("select * from tb_siswa_di_pembayaran_daful join tb_siswa on tb_siswa_di_pembayaran_daful.id_siswa = tb_siswa.id_siswa where tb_siswa_di_pembayaran_daful.id_set_daftar_ulang = '$id'");
+
+    	$query_list_detail_daful = $this->Model->kueri("select * from tb_detail_set_daftar_ulang join tb_detail_daftar_ulang on tb_detail_set_daftar_ulang.id_detail_daftar_ulang = tb_detail_daftar_ulang.id_detail_daftar_ulang where tb_detail_set_daftar_ulang.id_set_daftar_ulang = '$id'");
+    	$data = array(
+    		'main' => 'admin/pembayaran_daful/detail_pembayaran_daful',
+			'row_data' => $query,
+            'list_siswa' => $query_list_siswa,
+            'list_detail_daful' => $query_list_detail_daful,
+            'kelas' => $this->Model->list_data_all('tb_kelas'),
+		);
+		$this->load->view('layout', $data);
+    }
+
 }
+

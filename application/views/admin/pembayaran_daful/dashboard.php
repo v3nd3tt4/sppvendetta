@@ -25,14 +25,14 @@
                 <?php		
                 $i=1;		
                 if (!empty($set_spp)) {
-                    foreach ($set_spp->result() as $row) {
+                    foreach ($set_spp as $row) {
                         ?>
                         
                             <tr>
                                 <td ><?php echo $i ?>.</td>
                                 <td ><?php echo $row->keterangan; ?></td>
                                 <td>
-                                    <a class="btn btn-success btn-xs" href="<?php echo base_url('pembayaran/detail/' . $row->id_set_spp); ?>" ><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    <a class="btn btn-success btn-xs" href="<?php echo base_url('pembayaran_daful/detail/' . $row->id_set_daftar_ulang); ?>" ><i class="fa fa-eye" aria-hidden="true"></i></a>
 <!--                                    <a class="btn btn-danger btn-xs" href="<?php echo base_url('hapus/remove/' . $row->id_set_spp); ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" ><span class="glyphicon glyphicon-trash"></span></a>-->
                                 </td>
                             </tr>
