@@ -167,5 +167,42 @@ class Pembayaran_daful extends CI_Controller {
         }
     }
 
+     public function cetak_laporan_cicilan($id_set_daftar_ulang){
+        $query = $this->Model->kueri("select * from tb_set_daftar_ulang where id_set_daftar_ulang = '$id_set_daftar_ulang'");
+        $query2 = $this->Model->kueri("select * from tb_transaksi_pembayaran_spp join tb_siswa on tb_transaksi_pembayaran_spp.id_siswa = tb_siswa.id_siswa where id_set_spp = '$id_set_daftar_ulang' group by tb_transaksi_pembayaran_spp.id_siswa");
+        
+        $query3 = $this->Model->kueri("select count(*) as jumlah from tb_transaksi_pembayaran_spp join tb_siswa on tb_transaksi_pembayaran_spp.id_siswa = tb_siswa.id_siswa where id_set_spp = '$id_set_daftar_ulang' group by tb_transaksi_pembayaran_spp.id_siswa limit 1");
+
+        $data = array(
+            'tb_set_daful' => $query,
+            'tb_transaksi_pembayaran_daful' => $query2,
+            'list_siswa' => $this->Model->kueri("select * from tb_siswa_di_pembayaran_daful join tb_siswa on tb_siswa_di_pembayaran_daful.id_siswa = tb_siswa.id_siswa where id_set_daftar_ulang = '$id_set_daftar_ulang'"),
+            'total' => $query3,
+            'loop_bln_thn' => $this->cek_month1($query->row()->dari, $query->row()->sampai),
+        
+        );
+
+        $this->load->view('admin/pembayaran_daful/laporan_cicilan', $data);
+    }
+
+    public function cek_month1($dari, $sampai){
+        // Set timezone
+        date_default_timezone_set('UTC');
+
+        // Start date
+        $date = $dari;
+        // End date
+        $end_date = $sampai;
+        $tgl = array();
+        while (strtotime($date) <= strtotime($end_date)) {
+            $tgl [] =  array(
+                'month' => date("m", strtotime($date)),
+                'year' => date("Y", strtotime($date)),
+            );
+            $date = date ("Y-m-d", strtotime("+1 month", strtotime($date)));
+        }
+        return json_encode($tgl);
+    }
+
 }
 
