@@ -204,5 +204,26 @@ class Pembayaran_daful extends CI_Controller {
         return json_encode($tgl);
     }
 
+    public function cetak_laporan_pembagi($id_set_daftar_ulang){
+        $query = $this->Model->kueri("select * from tb_set_daftar_ulang where id_set_daftar_ulang = '$id_set_daftar_ulang'");
+        $query2 = $this->Model->kueri("select * from tb_transaksi_pembayaran_spp join tb_siswa on tb_transaksi_pembayaran_spp.id_siswa = tb_siswa.id_siswa where id_set_spp = '$id_set_daftar_ulang' group by tb_transaksi_pembayaran_spp.id_siswa");
+        
+        $query3 = $this->Model->kueri("select count(*) as jumlah from tb_transaksi_pembayaran_spp join tb_siswa on tb_transaksi_pembayaran_spp.id_siswa = tb_siswa.id_siswa where id_set_spp = '$id_set_daftar_ulang' group by tb_transaksi_pembayaran_spp.id_siswa limit 1");
+
+        // $query_detail_daful = $this->Model->get_data('tb_detail_set_daftar_ulang', array('id_set_daftar_ulang' => $id_set_daftar_ulang));
+        $query_detail_daful = $this->Model->kueri("select * from tb_detail_set_daftar_ulang join tb_detail_daftar_ulang on tb_detail_daftar_ulang.id_detail_daftar_ulang = tb_detail_set_daftar_ulang.id_detail_daftar_ulang where id_set_daftar_ulang = '$id_set_daftar_ulang'");
+        $data = array(
+            'tb_set_daful' => $query,
+            'tb_transaksi_pembayaran_daful' => $query2,
+            'list_siswa' => $this->Model->kueri("select * from tb_siswa_di_pembayaran_daful join tb_siswa on tb_siswa_di_pembayaran_daful.id_siswa = tb_siswa.id_siswa where id_set_daftar_ulang = '$id_set_daftar_ulang'"),
+            'total' => $query3,
+            'loop_bln_thn' => $this->cek_month1($query->row()->dari, $query->row()->sampai),
+            'detail_daful' => $query_detail_daful
+        
+        );
+
+        $this->load->view('admin/pembayaran_daful/laporan_cicilan_pembagi', $data);
+    }
+
 }
 

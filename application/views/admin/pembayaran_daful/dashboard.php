@@ -34,6 +34,7 @@
                                 <td>
                                     <a class="btn btn-success btn-xs" href="<?php echo base_url('pembayaran_daful/detail/' . $row->id_set_daftar_ulang); ?>" ><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     <a class="btn btn-primary btn-xs" href="<?php echo base_url('pembayaran_daful/cetak_laporan_cicilan/' . $row->id_set_daftar_ulang); ?>" target="_blank" ><i class="fa fa-print" aria-hidden="true"></i></a>
+                                    <a class="btn btn-warning btn-xs" href="<?php echo base_url('pembayaran_daful/cetak_laporan_pembagi/' . $row->id_set_daftar_ulang); ?>" target="_blank" ><i class="fa fa-print" aria-hidden="true"></i></a>
 <!--                                    <a class="btn btn-danger btn-xs" href="<?php echo base_url('hapus/remove/' . $row->id_set_spp); ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" ><span class="glyphicon glyphicon-trash"></span></a>-->
                                 </td>
                             </tr>
