@@ -52,9 +52,9 @@ class Backup extends CI_Controller {
 		$user = 'root';
 		$pass = 'goldroger27';
 		$host = 'localhost';
-		$dir = dirname(__FILE__) . '/dump.sql';
+		$dir = $ket.'.sql';
 		echo "<h3>Backing up database to `<code>{$dir}</code>`</h3>";
-		exec("mysqldump --user={$user} --password={$pass} --host={$host} {$database} --result-file={$dir} 2>&1", $output);
+		exec("/Applications/XAMPP/bin/mysqldump --user={$user} --password={$pass} --host={$host} {$database} --result-file={$dir} 2>&1", $output);
 		var_dump($output);
     }
 }
