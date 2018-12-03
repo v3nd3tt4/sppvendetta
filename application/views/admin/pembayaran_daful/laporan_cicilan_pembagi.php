@@ -52,14 +52,18 @@
 		<td><?=$row_transaksi_spp->nama_siswa?></td>
 		<td>Rp. <?=number_format($total_sudah_dibayar, '0', ',', '.')?></td>
 		<?php $tampil1 = 0 ;foreach($detail_daful->result() as $row_detail_daful){
-			$total_sudah_dibayar -= $row_detail_daful->nominal_bayar;
+			
 			// if($total_sudah_dibayar1 > 0){
 				if($total_sudah_dibayar > $row_detail_daful->nominal_bayar){
 					$tampil = $row_detail_daful->nominal_bayar;
-				}else{
-					
-					$tampil = $total_sudah_dibayar + $row_detail_daful->nominal_bayar;
+				}else{					
+					$tampil = $total_sudah_dibayar;
 				}
+                $total_sudah_dibayar -= $row_detail_daful->nominal_bayar;
+        
+                if($total_sudah_dibayar < 0){
+                    $total_sudah_dibayar = 0;
+                }
 			// }else{
 			// 	$tampil = 1;
 			// }
