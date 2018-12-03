@@ -81,8 +81,9 @@
 		<?php }?>
 	</tr>
 	<?php }?>
-</table>
+</table><br/><br/>
 </div>
+
 <style type="text/css">
 	table {
     border-collapse: collapse;
