@@ -65,7 +65,7 @@
             </li>
         </ul> 
 
-        <ul class="nav side-menu">
+        <!--<ul class="nav side-menu">
             <li><a><i class="fa fa-database" aria-hidden="true"></i> Database <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
                     <li><a href="<?php echo base_url('backup/backupdatabase') ?>">Backup Database</a>
@@ -73,7 +73,7 @@
                     
                 </ul>
             </li>
-        </ul>             
+        </ul>    -->         
         
         <!-- <ul class="nav side-menu">
             <li><a><i class="fa fa-user-md"></i> User Management <span class="fa fa-chevron-down"></span></a>

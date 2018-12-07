@@ -74,7 +74,7 @@ class Pembayaran extends CI_Controller {
             'id_jenis_pembayaran' => '1', 
             'dari' => $this->input->post('dari', true),
             'sampai' => $this->input->post('sampai', true),
-            'kelas' => $this->input->post('kelas', true),
+            'id_kelas' => $this->input->post('kelas', true),
         );
         $this->db->insert('tb_set_spp', $data1);
         $id_set_spp = $this->db->insert_id();
