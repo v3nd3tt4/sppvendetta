@@ -55,16 +55,26 @@
         </ul>     
 
         <ul class="nav side-menu">
-            <li><a><i class="fa fa-print"></i> Laporan <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-print"></i> Laporan SPP<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">
-                    <li><a href="<?php echo base_url('laporan/laporan_spp_perhari') ?>">Laporan Transaksi SPP</a>
+                    <li><a href="<?php echo base_url('laporan/laporan_spp_perhari') ?>">Laporan Transaksi SPP Per Periode</a>
                     </li>
-                    <li><a href="<?php echo base_url('laporan/laporan_daful_perhari') ?>">Laporan Transaksi Daftar Ulang </a>
+                    <li><a href="<?php echo base_url('laporan/laporan_spp_pertgl') ?>">Laporan Transaksi SPP Per Tanggal</a>
                     </li>
                 </ul>
             </li>
         </ul> 
 
+        <ul class="nav side-menu">
+            <li><a><i class="fa fa-print"></i> Laporan Daftar Ulang<span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                    <li><a href="<?php echo base_url('laporan/laporan_daful_perhari') ?>">Laporan Transaksi Daftar Ulang Per Periode </a>
+                    </li>
+                    <li><a href="<?php echo base_url('laporan/laporan_daful_pertgl') ?>">Laporan Transaksi Daftar Ulang Per Tanggal </a>
+                    </li>
+                </ul>
+            </li>
+        </ul> 
         <!--<ul class="nav side-menu">
             <li><a><i class="fa fa-database" aria-hidden="true"></i> Database <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none">

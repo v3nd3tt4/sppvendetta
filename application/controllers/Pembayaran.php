@@ -190,7 +190,7 @@ class Pembayaran extends CI_Controller {
         $data = array(
             'no_kwitansi' => $this->input->post('no_kwitansi'),
             'jumlah_bayar' => $this->input->post('nominal_bayar'),
-            'tanggal_transaksi' => date('Y-m-d H:i:s'),
+            'tanggal_transaksi' => date('Y-m-d', strtotime($this->input->post('tgl_trx'))).' '.date('H:i:s'),
             'status' => 'sudah bayar'
         );
         $update = $this->Model->update_data('tb_transaksi_pembayaran_spp', $data, array('id_transaksi_spp' => $this->input->post('id_transaksi_spp')));

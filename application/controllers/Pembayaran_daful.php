@@ -150,10 +150,20 @@ class Pembayaran_daful extends CI_Controller {
     }
 
     public function proses_pembayaran_daful(){
+        $id_set_daftar_ulang = $this->input->post('id_set_daftar_ulang');
+        $id_siswa = $this->input->post('id_siswa');
+        $getbiayadaful = $this->Model->get_data('tb_set_daftar_ulang', array('id_set_daftar_ulang' => $this->input->post('id_set_daftar_ulang')));
+        $biaya_daful = $getbiayadaful->row()->biaya_daful;
+        $getsudahdibayar = $this->Model->kueri("select sum(jumlah_bayar) as sudah_dibayar from tb_transaksi_pembayaran_daful where id_set_daftar_ulang ='$id_set_daftar_ulang' and id_siswa = '$id_siswa'");
+        $sudah_dibayar = $getsudahdibayar->row()->sudah_dibayar;
+        if($biaya_daful == $sudah_dibayar){
+            echo '<script>alert("Tidak diperbolehkan karena daftar ulang sudah lunas");location.reload();</script>';
+            exit();
+        }
     	$data = array(
             'no_kwitansi' => $this->input->post('no_kwitansi'),
             'jumlah_bayar' => $this->input->post('nominal_bayar'),
-            'tanggal_transaksi' => date('Y-m-d H:i:s'),
+            'tanggal_transaksi' => date('Y-m-d', strtotime($this->input->post('tgl_trx'))).' '.date('H:i:s'),
             'status' => 'sudah bayar',
             'id_siswa' => $this->input->post('id_siswa'),
             'id_set_daftar_ulang' => $this->input->post('id_set_daftar_ulang')

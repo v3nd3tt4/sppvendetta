@@ -11,7 +11,7 @@
 	</div>
 	<div class="form-group">
 		<label>Tanggal Transaksi:</label>
-		<input type="date" class="form-control" name="kewajiban" value="<?=date('Y-m-d')?>"/>
+		<input type="date" class="form-control" name="tgl_trx" value="<?=date('Y-m-d')?>"/>
 	</div>
 	<div class="form-group">
 		<label>Nominal bayar:</label>

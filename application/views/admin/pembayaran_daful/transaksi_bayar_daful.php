@@ -11,6 +11,10 @@
 		<input type="text" class="form-control" name="kewajiban" value="<?=$row->row()->biaya_daful?>" readonly/>
 	</div>
 	<div class="form-group">
+		<label>Tanggal Transaksi:</label>
+		<input type="date" class="form-control" name="tgl_trx" value="<?=date('Y-m-d')?>"/>
+	</div>
+	<div class="form-group">
 		<label>Nominal bayar:</label>
 		<input type="number" class="form-control" name="nominal_bayar"/>
 	</div>

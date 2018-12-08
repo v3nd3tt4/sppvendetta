@@ -41,6 +41,14 @@ class Laporan extends CI_Controller {
 		$this->load->view('layout', $data);
     }
 
+    public function laporan_spp_pertgl(){
+        $data = array(
+            'main' => 'admin/laporan/laporan_spp_pertgl',
+            
+        );
+        $this->load->view('layout', $data);
+    }
+
     public function proses_laporan_spp(){
     	$dari = $this->input->post('dari', true);
     	$sampai = $this->input->post('sampai', true);
@@ -54,12 +62,31 @@ class Laporan extends CI_Controller {
     	$this->load->view('admin/laporan/cetak_laporan_spp_perhari', $data);
     }
 
+    public function proses_laporan_spp_pertgl(){
+        $tgl = $this->input->post('tgl', true);
+        $query = $this->Model->kueri("select * from tb_transaksi_pembayaran_spp join tb_siswa on tb_transaksi_pembayaran_spp.id_siswa = tb_siswa.id_siswa where date(tanggal_transaksi) = '$tgl' order by tanggal_transaksi DESC");
+        // var_dump($query->result());
+        $data = array(
+            'row' => $query,
+            'tgl' => $tgl,
+        );
+        $this->load->view('admin/laporan/cetak_laporan_spp_pertgl', $data);
+    }
+
     public function laporan_daful_perhari(){
         $data = array(
 			'main' => 'admin/laporan/laporan_daful_perhari',
             
 		);
 		$this->load->view('layout', $data);
+    }
+
+    public function laporan_daful_pertgl(){
+        $data = array(
+            'main' => 'admin/laporan/laporan_daful_pertgl',
+            
+        );
+        $this->load->view('layout', $data);
     }
 
     public function proses_laporan_daful(){
@@ -74,4 +101,17 @@ class Laporan extends CI_Controller {
     	);
     	$this->load->view('admin/laporan/cetak_laporan_daful_perhari', $data);
     }
+
+    public function proses_laporan_daful_pertgl(){
+        $tgl = $this->input->post('tgl', true);
+        $sampai = $this->input->post('sampai', true);
+        $query = $this->Model->kueri("select * from tb_transaksi_pembayaran_daful join tb_siswa on tb_transaksi_pembayaran_daful.id_siswa = tb_siswa.id_siswa where date(tanggal_transaksi) = '$tgl' order by tanggal_transaksi DESC");
+        // var_dump($query->result());
+        $data = array(
+            'row' => $query,
+            'tgl' => $tgl,
+        );
+        $this->load->view('admin/laporan/cetak_laporan_daful_pertgl', $data);
+    }
+
 }
