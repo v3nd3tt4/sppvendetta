@@ -6,12 +6,30 @@
         <div class="strong">
             <h1>Sistem Informasi Pembayaran SPP</h1>
          	<hr/>
-
-			<br><br><br>
+         	<div class="row">
+         		<div class="col-md-6">
+         			<img src="<?=base_url()?>assets/photo1.jpg" class="img img-responsive" />
+         		</div>
+         		<div class="col-md-6">
+         			<img src="<?=base_url()?>assets/photo2.jpg" class="img img-responsive" />
+         		</div>
+         	</div>
+         	<div class="row">
+         		<div class="col-md-4">
+         			<img src="<?=base_url()?>assets/photo3.jpg" class="img img-responsive" />
+         		</div>
+         		<div class="col-md-4">
+         			<img src="<?=base_url()?>assets/photo4.jpg" class="img img-responsive" />
+         		</div>
+         		<div class="col-md-4">
+         			<img src="<?=base_url()?>assets/photo5.jpg" class="img img-responsive" />
+         		</div>
+         	</div>
 			<br>
 			
-			<br>
+			<br><br/>
 			<?php echo pretty_date(date('Y-m-d'), 'l, d F Y',FALSE) ?> 
+			<br/><br/>
 		</div>
 	</div>
 </div>
