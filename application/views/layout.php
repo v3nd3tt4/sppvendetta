@@ -215,17 +215,17 @@
                                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                             </div>
 
-                            <ul class="nav navbar-nav navbar-right">
+                            <!-- <ul class="nav navbar-nav navbar-right">
                                 <li class="">
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                         <img src="<?php echo media_url() ?>/images/user.png" alt=""><?php echo $text = ucfirst($this->session->userdata('user_full_name')); ?>
                                         <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                        <!-- <li><a href="<?php echo site_url('admin/dashboard') ?>">  Home</a>
+                                        <li><a href="<?php echo site_url('admin/dashboard') ?>">  Home</a>
                                         </li>
                                         <li><a href="<?php echo site_url('admin/profile') ?>">  Profile</a>
-                                        </li> -->
+                                        </li>
                                         <li>&nbsp;</li>
                                         <li>
                                         <center>
@@ -238,7 +238,7 @@
                                         <li>&nbsp;</li>
                                     </ul>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </nav>
                     </div>
 
