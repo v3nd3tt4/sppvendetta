@@ -221,5 +221,68 @@ class Pembayaran extends CI_Controller {
 
         $this->load->view('admin/pembayaran/laporan_cicilan', $data);
     }
+
+    public function getkwitansi_cicilan(){
+        $id = $this->input->post('id', true);
+        $acak = rand(10, 99);
+        $nokwitansi =  date('YmdHis').$acak;
+        $query = $this->Model->get_data('tb_transaksi_pembayaran_spp', array('id_transaksi_spp' => $id));
+        $querycicilan = $this->Model->kueri("select sum(jumlah_bayar) as jumlah_cicilan_sudah_dibayar from tb_cicilan_spp where id_transaksi_spp = '$id'");
+        $querycicilan2 = $this->Model->kueri("select * from tb_cicilan_spp where id_transaksi_spp = '$id'");
+        $data = array(
+            // 'main' => 'transaksi_bayar_spp',
+            'row' => $query,
+            'no_kwitansi' => $nokwitansi,
+            'row_cicilan' => $querycicilan,
+            'row_detail_cicilan' => $querycicilan2
+        );
+        $this->load->view('admin/pembayaran/transaksi_bayar_spp_cicilan', $data);
+    }
+
+    public function proses_pemabayaran_spp_cicilan(){
+        $getpembayaranspp = $this->Model->get_data('tb_transaksi_pembayaran_spp', array('id_transaksi_spp' => $this->input->post('id_transaksi_spp')));
+
+        $id = $this->input->post('id_transaksi_spp', true);
+        if($this->input->post('nominal_bayar') > $getpembayaranspp->row()->nominal_default){
+            echo '<script>alert("Tidak diperbolehkan, karena nominal bayar tidak boleh dari kewajiban bayar");location.reload();</script>';
+            exit();
+        }
+
+
+
+        $querycicilan = $this->Model->kueri("select sum(jumlah_bayar) as jumlah_cicilan_sudah_dibayar from tb_cicilan_spp where id_transaksi_spp = '$id'");
+        $querycicilan2 = $this->Model->kueri("select * from tb_cicilan_spp where id_transaksi_spp = '$id'");
+
+        $jumlah_cicilan = $querycicilan->row()->jumlah_cicilan_sudah_dibayar === NULL ? 0 : $querycicilan->row()->jumlah_cicilan_sudah_dibayar; 
+
+        $total = $getpembayaranspp->row()->jumlah_bayar + $jumlah_cicilan;
+
+
+
+        if($this->input->post('nominal_bayar') + $total > $getpembayaranspp->row()->nominal_default){
+            echo '<script>alert("Tidak diperbolehkan, karena nominal bayar tidak boleh dari kewajiban bayar");location.reload();</script>';
+            exit();
+        }
+
+        if($total == $getpembayaranspp->row()->nominal_default){
+            echo '<script>alert("Tidak diperbolehkan, karena sudah lunas");location.reload();</script>';
+            exit();
+        }
+
+        $data = array(
+            'no_kwitansi' => $this->input->post('no_kwitansi'),
+            'jumlah_bayar' => $this->input->post('nominal_bayar'),
+            'tanggal_transaksi' => date('Y-m-d', strtotime($this->input->post('tgl_trx'))).' '.date('H:i:s'),
+            'id_transaksi_spp' => $id,
+            'id_siswa' => $getpembayaranspp->row()->id_siswa
+        );
+        $update = $this->Model->simpan_data($data, 'tb_cicilan_spp');
+
+        if($update){
+            echo '<script>alert("data berhasil disimpan");location.reload();</script>';
+        }else{
+            echo '<script>alert("data gagal disimpan");location.reload();</script>';
+        }
+    }
     
 }

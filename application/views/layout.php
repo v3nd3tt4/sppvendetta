@@ -119,6 +119,37 @@
 
                     });
                 });
+
+                $(document).on('click', '.btn_bayar_transaksi_cicilan', function(e){
+                    e.preventDefault();
+                    var id = $(this).attr('id');
+                    $('#result_pembayaran_cicilan').html('Loading...');
+                    $('#modal_pembayaran_cicilan').modal();
+                    $.ajax({
+                        url : '<?=base_url()?>pembayaran/getkwitansi_cicilan',
+                        type: 'POST',
+                        data: 'id='+id,
+                        success: function(msg){
+                            $('#result_pembayaran_cicilan').html(msg);
+                        }
+
+                    });
+                });
+
+                $(document).on('submit', '#form_transaksi_pembayaran_spp_cicilan', function(e){
+                    e.preventDefault();
+                    $('#notif_transaksi_pembayaran_spp_cicilan').html('Loading...');
+                    var data = $('#form_transaksi_pembayaran_spp_cicilan').serialize();
+                    $.ajax({
+                        url : '<?=base_url()?>pembayaran/proses_pemabayaran_spp_cicilan',
+                        type: 'POST',
+                        data: data,
+                        success: function(msg){
+                            $('#notif_transaksi_pembayaran_spp_cicilan').html(msg);
+                        }
+                    });
+                });
+
             });
             var BASEURL = '<?php echo base_url() ?>';
         </script>

@@ -57,12 +57,21 @@
                     <th>Tanggal Transaksi</th>
                     <th>Kewajiban</th>
                     <th>Jumlah Bayar</th>
+                    <th>Total Cicilan</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
              </thead>
              <tbody>
-                 <?php $no=1;foreach($list_transaksi->result() as $row_list_transaksi){?>
+                 <?php $no=1;foreach($list_transaksi->result() as $row_list_transaksi){
+
+                  $id = $row_list_transaksi->id_transaksi_spp;
+                  $querycicilan = $this->Model->kueri("select sum(jumlah_bayar) as jumlah_cicilan_sudah_dibayar from tb_cicilan_spp where id_transaksi_spp = '$id'");
+
+                  $jumlah_cicilan = $querycicilan->row()->jumlah_cicilan_sudah_dibayar === NULL ? 0 : $querycicilan->row()->jumlah_cicilan_sudah_dibayar; 
+
+                  $total = $row_list_transaksi->jumlah_bayar + $jumlah_cicilan;
+                  ?>
                 <tr>
                     <td><?=$no++;?>.</td>
                     <td><?=$this->Model->konversi_bulan($row_list_transaksi->bulan)?></td>
@@ -71,6 +80,7 @@
                     <td><?=$row_list_transaksi->tanggal_transaksi?></td>
                     <td>Rp. <?=number_format($row_list_transaksi->nominal_default)?></td>
                     <td>Rp. <?=number_format($row_list_transaksi->jumlah_bayar)?></td>
+                    <td>Rp. <?=number_format($jumlah_cicilan)?></td>
                     <td><?=$row_list_transaksi->status?></td>
                     <td>
                         <?php if($row_list_transaksi->status == 'belum bayar'){?>
@@ -78,8 +88,15 @@
                         <?php }else{
 
                         if($row_list_transaksi->jumlah_bayar < $row_list_transaksi->nominal_default){
+                          if($total == $row_list_transaksi->nominal_default){
+                            $text = 'lihat ';
+                            echo '<a href="#" class="btn btn-primary btn-xs" id="<?=$row_list_transaksi->id_transaksi_spp?>"><i class="fa fa-check" aria-hidden="true"></i> Lunas</a>';
+                            echo '<a href="#" class="btn btn-warning btn-xs btn_bayar_transaksi_cicilan" id="'.$row_list_transaksi->id_transaksi_spp.'"> Lihat Cicilan</a>';
+                          }else{
+                            echo '<a href="#" class="btn btn-warning btn-xs btn_bayar_transaksi_cicilan" id="'.$row_list_transaksi->id_transaksi_spp.'"> Transaksi Cicilan</a>';
+                          }
                         ?>
-                        <a href="#" class="btn btn-warning btn-xs" id="<?=$row_list_transaksi->id_transaksi_spp?>"> Transaksi Cicilan</a>
+                          
                         <?php
                         }else{?>
                         <a href="#" class="btn btn-primary btn-xs" id="<?=$row_list_transaksi->id_transaksi_spp?>"><i class="fa fa-check" aria-hidden="true"></i> Lunas</a>
@@ -105,6 +122,27 @@
       </div>
       <div class="modal-body">
         <div id="result_pembayaran"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="modal_pembayaran_cicilan" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Transaksi Cicilan</h4>
+      </div>
+      <div class="modal-body">
+        <div id="result_pembayaran_cicilan"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
