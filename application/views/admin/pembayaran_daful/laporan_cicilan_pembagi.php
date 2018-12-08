@@ -31,6 +31,8 @@
 		</td>
 
 		<?php }?>
+		<td rowspan ="2">Total Bayar</td>
+		<td rowspan="2">Tunggakan</td>
 	</tr>
 	
 	<tr>
@@ -44,6 +46,7 @@
 		$id_set_daftar_ulang = $tb_set_daful->row()->id_set_daftar_ulang;
 		$get_total_sudah_bayar = $this->Model->kueri("select sum(jumlah_bayar) as sudah_dibayar, jumlah_bayar, tanggal_transaksi from tb_transaksi_pembayaran_daful where id_siswa = '$id_siswa' and id_set_daftar_ulang = '$id_set_daftar_ulang'");
 		$total_sudah_dibayar = $get_total_sudah_bayar->row()->sudah_dibayar;
+		$total_sudah_dibayar_tampil = $get_total_sudah_bayar->row()->sudah_dibayar;
 
 	?>
 	<tr>
@@ -79,6 +82,8 @@
 		</td>
 		
 		<?php }?>
+		<td>Rp. <?=number_format($total_sudah_dibayar_tampil, '0', ',', '.')?></td>
+		<td>Rp. <?=number_format($tb_set_daful->row()->biaya_daful - $total_sudah_dibayar_tampil, '0', ',', '.')?></td>
 	</tr>
 	<?php }?>
 </table><br/><br/>

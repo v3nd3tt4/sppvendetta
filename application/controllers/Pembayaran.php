@@ -187,6 +187,11 @@ class Pembayaran extends CI_Controller {
     }
 
     public function proses_pemabayaran_spp(){
+        $getpembayaranspp = $this->Model->get_data('tb_transaksi_pembayaran_spp', array('id_transaksi_spp' => $this->input->post('id_transaksi_spp')));
+        if($this->input->post('nominal_bayar') > $getpembayaranspp->row()->nominal_default){
+            echo '<script>alert("Tidak diperbolehkan, karena nominal bayar tidak boleh dari kewajiban bayar");location.reload();</script>';
+            exit();
+        }
         $data = array(
             'no_kwitansi' => $this->input->post('no_kwitansi'),
             'jumlah_bayar' => $this->input->post('nominal_bayar'),

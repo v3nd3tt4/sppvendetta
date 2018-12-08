@@ -28,6 +28,8 @@
 		<td colspan="2">Angsuran ke-<?=$i?></td>
 
 		<?php }?>
+		<td rowspan ="2">Total Bayar</td>
+		<td rowspan="2">Tunggakan</td>
 	</tr>
 	
 	<tr>
@@ -42,18 +44,18 @@
 		<td><?=$no++?>.</td>
 		<td><?=$row_transaksi_spp->nis?></td>
 		<td><?=$row_transaksi_spp->nama_siswa?></td>
-		<?php for($i=1;$i<=$tb_set_daful->row()->max_angsuran;$i++){?>
+		<?php $totalsudahbayar = 0;for($i=1;$i<=$tb_set_daful->row()->max_angsuran;$i++){?>
 		<?php $querylagi= $this->Model->get_data('tb_transaksi_pembayaran_daful', array('id_siswa' => $row_transaksi_spp->id_siswa, 'id_set_daftar_ulang' => $row_transaksi_spp->id_set_daftar_ulang)) ;
 			$hitung_loop = $querylagi->num_rows();
-			if($hitung_loop!= 10){
-				$cek_loop = 10 - $hitung_loop ;
+			if($hitung_loop != $tb_set_daful->row()->max_angsuran){
+				$cek_loop = $tb_set_daful->row()->max_angsuran - $hitung_loop ;
 			}else{
-				$cek_loop = 10;
+				$cek_loop = $tb_set_daful->row()->max_angsuran;
 			}
 		?>
 		<?php 
 			foreach($querylagi->result() as $row_querylagi){
-
+			$totalsudahbayar += $row_querylagi->jumlah_bayar;
 		?>
 		<td>Rp. <?=number_format($row_querylagi->jumlah_bayar)?></td>
 		<td><?=$row_querylagi->tanggal_transaksi?></td>
@@ -67,7 +69,7 @@
            /* You could also write 'break 1;' here. */
     	}
 
-    	//echo '<td></td><td></td>'; ?>
+    	echo '<td>Rp. '.number_format($totalsudahbayar).'</td><td>Rp. '.number_format($tb_set_daful->row()->biaya_daful - $totalsudahbayar).'</td>'; ?>
 
 	</tr>
 	<?php }?>

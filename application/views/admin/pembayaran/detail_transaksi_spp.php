@@ -75,9 +75,15 @@
                     <td>
                         <?php if($row_list_transaksi->status == 'belum bayar'){?>
                         <a href="#" class="btn btn-success btn-xs btn_bayar_transaksi" id="<?=$row_list_transaksi->id_transaksi_spp?>">Lakukan Pembayaran</a>
-                        <?php }else{?>
+                        <?php }else{
+
+                        if($row_list_transaksi->jumlah_bayar < $row_list_transaksi->nominal_default){
+                        ?>
+                        <a href="#" class="btn btn-warning btn-xs" id="<?=$row_list_transaksi->id_transaksi_spp?>"> Transaksi Cicilan</a>
+                        <?php
+                        }else{?>
                         <a href="#" class="btn btn-primary btn-xs" id="<?=$row_list_transaksi->id_transaksi_spp?>"><i class="fa fa-check" aria-hidden="true"></i> Lunas</a>
-                        <?php }?>
+                        <?php }}?>
                     </td>
                 </tr>
                  <?php }?>
