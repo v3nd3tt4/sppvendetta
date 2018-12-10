@@ -27,6 +27,20 @@ Tanggal: <?=date('d/m/Y',strtotime($tgl))?>
 		
 	</tr>
 	<?php }?>
+	<?php $no1=$no; foreach($row_cicilan->result() as $row_data_cicilan){
+		$total += $row_data_cicilan->jumlah_bayar
+	?>
+	<tr>
+		<td><?=$no1++?>.</td>
+		<td><?=$row_data_cicilan->nis?></td>
+		<td><?=$row_data_cicilan->nama_siswa?></td>
+		<td><?=$row_data_cicilan->no_kwitansi?></td>
+		<td><?=$row_data_cicilan->tanggal_transaksi?></td>
+		<td>Rp. <?=number_format($row_data_cicilan->jumlah_bayar, '0', ',', '.')?></td>
+		
+	</tr>
+	<?php }?>
+	
 	<tr>
 		<td colspan="5" align="center">Total</td>
 		<td colspan="1">Rp. <?=number_format($total, '0', ',', '.')?></td>

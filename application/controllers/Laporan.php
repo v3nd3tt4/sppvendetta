@@ -65,9 +65,11 @@ class Laporan extends CI_Controller {
     public function proses_laporan_spp_pertgl(){
         $tgl = $this->input->post('tgl', true);
         $query = $this->Model->kueri("select * from tb_transaksi_pembayaran_spp join tb_siswa on tb_transaksi_pembayaran_spp.id_siswa = tb_siswa.id_siswa where date(tanggal_transaksi) = '$tgl' order by tanggal_transaksi DESC");
+		$query2 = $this->Model->kueri("select * from tb_cicilan_spp join tb_siswa on tb_cicilan_spp.id_siswa = tb_siswa.id_siswa where date(tanggal_transaksi) = '$tgl' order by tanggal_transaksi DESC");
         // var_dump($query->result());
         $data = array(
             'row' => $query,
+			'row_cicilan' => $query2,
             'tgl' => $tgl,
         );
         $this->load->view('admin/laporan/cetak_laporan_spp_pertgl', $data);
