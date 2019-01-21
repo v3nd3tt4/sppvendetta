@@ -92,8 +92,8 @@ class Pembayaran extends CI_Controller {
                     'tahun' => $row_bulan->year,
                 );
             }
-            
         }
+		var_dump($data2);exit;
         $this->db->insert_batch('tb_transaksi_pembayaran_spp', $data2);
         
         if ($this->db->trans_status() === FALSE)
