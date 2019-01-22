@@ -150,6 +150,11 @@
                     });
                 });
 
+                $(document).on('click', '.btn_tambah_siswa_spp', function(e){
+                    e.preventDefault();
+                    $('#modal_tambah_siswa_spp').modal();
+                });
+
             });
             var BASEURL = '<?php echo base_url() ?>';
         </script>

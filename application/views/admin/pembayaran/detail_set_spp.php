@@ -41,6 +41,7 @@
       
       <!-- /.col-lg-12 -->
       <div class="col-md-12">
+        <button class="btn btn-success btn_tambah_siswa_spp">Input siswa di dalam transaksi ini</button>
          <table class="table table-stripped datatable">
              <thead>
                 <tr>
@@ -67,3 +68,53 @@
    </div>
 </div>
 </form>
+
+
+<!-- Modal -->
+<div id="modal_tambah_siswa_spp" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Tambah siswa di dalam transaksi ini</h4>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="<?=base_url()?>pembayaran/store_siswa_dalam_transaksi">
+          <input type="hidden" name="id_set_spp" value="<?=$set_spp->row()->id_set_spp?>">
+          <div class="form-group">
+            <label>Judul Transaksi</label>
+            <input type="text" name="keterangan" class="form-control" readonly required value="<?=$set_spp->row()->keterangan?>">
+          </div>
+          <div class="form-group">
+                <label>Dari</label>
+                <input type="date" name="dari" readonly value="<?=$set_spp->row()->dari?>" readonly class="form-control"/>
+            </div>
+             <div class="form-group">
+                <label>Sampai</label>
+                <input type="date" name="sampai" readonly value="<?=$set_spp->row()->sampai?>" readonly class="form-control"/>
+            </div>
+          <div class="form-group">
+            <label>Siswa</label>
+            <select class="form-control" name="siswa" required>
+              <option value="">--pilih--</option>
+              <?php foreach($siswa_yang_akan_ditambah->result() as $row_siswa_fresh){?>
+              <option value="<?=$row_siswa_fresh->id_siswa?>"><?=$row_siswa_fresh->nis?> - <?=$row_siswa_fresh->nama_siswa?></option>
+              <?php }?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Kewajiban Bayar SPP</label>
+            <input type="number" name="kewajiban_bayar" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-success">Simpan</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

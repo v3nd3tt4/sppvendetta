@@ -66,6 +66,22 @@ class Pembayaran extends CI_Controller {
 		);
 		$this->load->view('layout', $data);
     }
+
+    public function store_new(){
+        $data1 = array(
+            'keterangan' => $this->input->post('keterangan', true),
+            'id_jenis_pembayaran' => '1', 
+            'dari' => $this->input->post('dari', true),
+            'sampai' => $this->input->post('sampai', true),
+            'id_kelas' => $this->input->post('kelas', true),
+        );
+        $simpan = $this->db->insert('tb_set_spp', $data1);
+        if($simpan){
+            echo '<script>alert("data berhasil disimpan");window.location.href = "'.base_url().'pembayaran";</script>';
+        }else{
+            echo '<script>alert("data gagal disimpan");window.history.back();</script>';
+        }
+    }
     
     public function store(){
         $this->db->trans_begin();
@@ -93,7 +109,7 @@ class Pembayaran extends CI_Controller {
                 );
             }
         }
-		var_dump($data2);exit;
+		// var_dump($data2);exit;
         $this->db->insert_batch('tb_transaksi_pembayaran_spp', $data2);
         
         if ($this->db->trans_status() === FALSE)
@@ -107,6 +123,32 @@ class Pembayaran extends CI_Controller {
             echo '<script>alert("data berhasil disimpan");window.location.href = "'.base_url().'pembayaran";</script>';
         }
         
+    }
+
+    public function store_siswa_dalam_transaksi(){
+        $cek = $this->db->get_where('tb_transaksi_pembayaran_spp', array('id_set_spp' => $this->input->post('id_set_spp', true), 'id_siswa' => $this->input->post('siswa', true)));
+        if($cek->num_rows() != 0){
+            echo '<script>alert("Siswa ini sudah anda inputkan");window.history.back();</script>';
+            exit();
+        }
+        $bulantahun = json_decode($this->cek_month1($this->input->post('dari', true), $this->input->post('sampai', true)));
+        $data2 = array();
+        foreach($bulantahun as $row_bulan){
+            $data2[] = array(
+                'id_siswa' => $this->input->post('siswa', true),
+                'id_set_spp' => $this->input->post('id_set_spp', true),
+                'nominal_default' => $this->input->post('kewajiban_bayar', true),
+                'bulan' => $row_bulan->month,
+                'tahun' => $row_bulan->year,
+            );
+        }
+        // var_dump($data2);exit();
+        $simpan = $this->db->insert_batch('tb_transaksi_pembayaran_spp', $data2);
+        if($simpan){
+            echo '<script>alert("data berhasil disimpan");window.location.href = "'.base_url().'pembayaran/detail/'.$this->input->post('id_set_spp', true).'";</script>';
+        }else{
+            echo '<script>alert("data gagal disimpan");window.history.back();</script>';
+        }
     }
     
     public function cek_month(){
@@ -154,6 +196,7 @@ class Pembayaran extends CI_Controller {
             'set_spp' => $query,
             'list_siswa' => $query2,
             'kelas' => $this->Model->list_data_all('tb_kelas'),
+            'siswa_yang_akan_ditambah' => $this->db->get_where('tb_siswa', array('id_kelas' => $query->row()->id_kelas))
         );
         $this->load->view('layout', $data);
     }

@@ -6,7 +6,11 @@
       </div>
       <!-- /.col-lg-12 -->
       <div class="col-md-12">
+        <!--
+         old action set spp
          <form method="POST" action="<?=base_url()?>pembayaran/add_setting_pembayaran_spp1">
+        -->
+          <form method="POST" action="<?=base_url()?>pembayaran/store_new">
             <div class="form-group">
                <label >Keterangan *</label>
                <input type="text" name="keterangan" class="form-control" value="" required>
@@ -34,7 +38,7 @@
              <br>
              <div class="form-group">
                 <button type="submit"  class="btn btn-success ">
-                <i class="fa fa-arrow-right"></i> Next
+                <i class="fa fa-arrow-right"></i> Simpan
                 </button>
                 <br>
                 <br>
