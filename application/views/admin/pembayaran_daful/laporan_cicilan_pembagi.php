@@ -14,7 +14,7 @@
 	</tr>
 	<tr>
 		<td>Biaya Daftar Ulang</td>
-		<td>: Rp. <?=number_format($tb_set_daful->row()->biaya_daful)?></td>
+		<td>: Rp. <?=number_format($tb_set_daful->row()->biaya_daful, '0', ',', '.')?></td>
 	</tr>
 </table>
 <hr/>
@@ -41,22 +41,28 @@
 		<?php }?>
 	</tr>
 	
-	<?php $no=1;foreach($list_siswa->result() as $row_transaksi_spp){
+	<?php $no=1;
+	$tot_show = 0;
+	$tot_udah_bayar_show = 0;
+	$arr_sum_detail = array();
+	foreach($list_siswa->result() as $row_transaksi_spp){
 		$id_siswa = $row_transaksi_spp->id_siswa;
 		$id_set_daftar_ulang = $tb_set_daful->row()->id_set_daftar_ulang;
 		$get_total_sudah_bayar = $this->Model->kueri("select sum(jumlah_bayar) as sudah_dibayar, jumlah_bayar, tanggal_transaksi from tb_transaksi_pembayaran_daful where id_siswa = '$id_siswa' and id_set_daftar_ulang = '$id_set_daftar_ulang'");
 		$total_sudah_dibayar = $get_total_sudah_bayar->row()->sudah_dibayar;
+		$tot_show += $total_sudah_dibayar;
 		$total_sudah_dibayar_tampil = $get_total_sudah_bayar->row()->sudah_dibayar;
-
+		$tot_udah_bayar_show += ($tb_set_daful->row()->biaya_daful - $total_sudah_dibayar_tampil); 
 	?>
 	<tr>
 		<td><?=$no++?>.</td>
 		<td><?=$row_transaksi_spp->nis?></td>
 		<td><?=$row_transaksi_spp->nama_siswa?></td>
 		<td>Rp. <?=number_format($total_sudah_dibayar, '0', ',', '.')?></td>
-		<?php $tampil1 = 0 ;foreach($detail_daful->result() as $row_detail_daful){
-			
-			// if($total_sudah_dibayar1 > 0){
+		<?php $tampil1 = 0 ;
+		
+		$t_1 = 0;
+		foreach($detail_daful->result() as $row_detail_daful){
 				if($total_sudah_dibayar > $row_detail_daful->nominal_bayar){
 					$tampil = $row_detail_daful->nominal_bayar;
 				}else{					
@@ -67,28 +73,30 @@
                 if($total_sudah_dibayar < 0){
                     $total_sudah_dibayar = 0;
                 }
-			// }else{
-			// 	$tampil = 1;
-			// }
-				// $tampil1 += $tampil;
-				// if($tampil == $total_sudah_dibayar){
-				// 	$tampil = $tampil1;
-				// }else{
-				// 	$tampil = $tampil;
-				// }
 		?>
 		<td>
 			Rp. <?=number_format($tampil, '0', ',', '.')?>
 		</td>
 		
-		<?php }?>
+		<?php $t_1 += $tampil;}array_push($arr_sum_detail, $t_1);?>
 		<td>Rp. <?=number_format($total_sudah_dibayar_tampil, '0', ',', '.')?></td>
 		<td>Rp. <?=number_format($tb_set_daful->row()->biaya_daful - $total_sudah_dibayar_tampil, '0', ',', '.')?></td>
 	</tr>
-	<?php }?>
+	<?php 
+		
+	}?>
+	<tr>
+		<td colspan="3">Total</td>
+		<td>Rp. <?=number_format($tot_show, '0', ',', '.')?></td>
+		<?php foreach($detail_daful->result() as $data_tot){?>
+		<td></td>
+		<?php }?>
+		<td>Rp. <?=number_format($tot_show, '0', ',', '.')?></td>
+		<td>Rp. <?=number_format($tot_udah_bayar_show, '0', ',', '.')?></td>
+	</tr>
 </table><br/><br/>
 </div>
-
+<?=var_dump($arr_sum_detail)?>
 <style type="text/css">
 	table {
     border-collapse: collapse;
