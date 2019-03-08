@@ -73,30 +73,55 @@
                 if($total_sudah_dibayar < 0){
                     $total_sudah_dibayar = 0;
                 }
+
+                $t_1 += $tampil;
+
+                array_push($arr_sum_detail, $tampil);
 		?>
 		<td>
 			Rp. <?=number_format($tampil, '0', ',', '.')?>
 		</td>
 		
-		<?php $t_1 += $tampil;}array_push($arr_sum_detail, $t_1);?>
+		<?php }?>
 		<td>Rp. <?=number_format($total_sudah_dibayar_tampil, '0', ',', '.')?></td>
 		<td>Rp. <?=number_format($tb_set_daful->row()->biaya_daful - $total_sudah_dibayar_tampil, '0', ',', '.')?></td>
 	</tr>
 	<?php 
 		
-	}?>
+	}
+	$array = array_chunk($arr_sum_detail, count($detail_daful->result()));
+ 	
+	$first = $array[0];
+	$result = [];
+
+	// Terus di foreach key $first
+
+	foreach ($first as $i => $val) {
+		$result[$i] = array_sum(array_map(function($d) use ($i) {
+		return isset($d[$i]) ? $d[$i] : 0;
+		}, $array));
+	}
+
+	
+
+	?>
 	<tr>
 		<td colspan="3">Total</td>
 		<td>Rp. <?=number_format($tot_show, '0', ',', '.')?></td>
-		<?php foreach($detail_daful->result() as $data_tot){?>
-		<td></td>
+		<?php for($i=0;$i<count($result);$i++){?>
+		<td>Rp. <?=number_format($result[$i], '0', ',', '.')?></td>
 		<?php }?>
 		<td>Rp. <?=number_format($tot_show, '0', ',', '.')?></td>
 		<td>Rp. <?=number_format($tot_udah_bayar_show, '0', ',', '.')?></td>
 	</tr>
 </table><br/><br/>
 </div>
-<?=var_dump($arr_sum_detail)?>
+<pre>
+<?php
+
+ 	
+ ?>
+</pre>
 <style type="text/css">
 	table {
     border-collapse: collapse;
