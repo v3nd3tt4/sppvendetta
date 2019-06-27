@@ -155,6 +155,11 @@
                     $('#modal_tambah_siswa_spp').modal();
                 });
 
+                $(document).on('click', '.add_siswa_di_daful', function(e){
+                    e.preventDefault();
+                    $('#modal_tambah_siswa_daful').modal();
+                });
+
             });
             var BASEURL = '<?php echo base_url() ?>';
         </script>

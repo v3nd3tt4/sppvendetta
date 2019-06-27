@@ -102,6 +102,32 @@ class Pembayaran_daful extends CI_Controller {
         }
     }
 
+    public function store_siswa_dalam_transaksi(){
+        
+        $id_set_daful = $this->input->post('id_set_daful', true);
+        $id_siswa = $this->input->post('siswa', true);
+
+        //cek sudah ada siswa ini belum 
+        $query = $this->Model->get_data('tb_siswa_di_pembayaran_daful', array('id_set_daftar_ulang' => $id_set_daful, 'id_siswa' => $id_siswa));
+
+        if($query->num_rows() != 0){
+            echo '<script>alert("Siswa sudah ada di transaksi ini");window.history.back();</script>';
+            exit();
+        }
+
+        $data2= array(
+            'id_set_daftar_ulang' => $id_set_daful,
+            'id_siswa' => $id_siswa
+        );
+        $simpan = $this->db->insert('tb_siswa_di_pembayaran_daful', $data2);
+
+        if($simpan){
+            echo '<script>alert("data berhasil disimpan");window.history.back();</script>';
+        }else{
+            echo '<script>alert("data gagal disimpan");window.history.back();</script>';
+        }
+    }
+
     public function detail($id){
     	$query = $this->Model->get_data('tb_set_daftar_ulang', array('id_set_daftar_ulang' => $id));
 
@@ -114,6 +140,7 @@ class Pembayaran_daful extends CI_Controller {
             'list_siswa' => $query_list_siswa,
             'list_detail_daful' => $query_list_detail_daful,
             'kelas' => $this->Model->list_data_all('tb_kelas'),
+            'siswa_di_kelas' => $this->Model->get_data('tb_siswa', array('id_kelas' => $query->row()->id_kelas))
 		);
 		$this->load->view('layout', $data);
     }
