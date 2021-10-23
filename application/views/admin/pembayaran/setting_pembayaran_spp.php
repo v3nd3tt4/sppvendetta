@@ -34,7 +34,7 @@
                                 <td>
                                     <a class="btn btn-success btn-xs" href="<?php echo base_url('pembayaran/detail/' . $row->id_set_spp); ?>" ><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     <a class="btn btn-primary btn-xs" href="<?php echo base_url('pembayaran/cetak_laporan_cicilan/' . $row->id_set_spp); ?>" target="_blank" ><i class="fa fa-print" aria-hidden="true"></i></a>
-<!--                                    <a class="btn btn-danger btn-xs" href="<?php echo base_url('hapus/remove/' . $row->id_set_spp); ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" ><span class="glyphicon glyphicon-trash"></span></a>-->
+                                   <a class="btn btn-danger btn-xs" href="<?php echo base_url('pembayaran/hapus/' . $row->id_set_spp); ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" ><span class="glyphicon glyphicon-trash"></span></a>
                                 </td>
                             </tr>
                              <?php $i++;?>

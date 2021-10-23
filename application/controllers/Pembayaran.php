@@ -37,7 +37,7 @@ class Pembayaran extends CI_Controller {
         $data = array(
 			'main' => 'admin/pembayaran/setting_pembayaran_spp',
             'thn_ajaran' => $this->Model->list_data_all('tb_kelas'),
-            'set_spp' => $this->Model->kueri('select tb_set_spp.*, tb_jenis_pembayaran.nama_jenis_pembayaran from tb_set_spp join tb_jenis_pembayaran on tb_jenis_pembayaran.id_jenis_pembayaran = tb_set_spp.id_jenis_pembayaran where tb_set_spp.id_jenis_pembayaran = "1"')
+            'set_spp' => $this->Model->kueri('select tb_set_spp.*, tb_jenis_pembayaran.nama_jenis_pembayaran from tb_set_spp join tb_jenis_pembayaran on tb_jenis_pembayaran.id_jenis_pembayaran = tb_set_spp.id_jenis_pembayaran where tb_set_spp.id_jenis_pembayaran = "1" and status_data != "hapus"')
 		);
 		$this->load->view('layout', $data);
     }
@@ -325,6 +325,14 @@ class Pembayaran extends CI_Controller {
             echo '<script>alert("data berhasil disimpan");location.reload();</script>';
         }else{
             echo '<script>alert("data gagal disimpan");location.reload();</script>';
+        }
+    }
+    public function hapus($param){
+        $hapus =  $this->Model->update_data('tb_set_spp', array('status_data' => 'hapus', 'tgl_status_data' => date('Y-m-d H:i:s')), array('id_set_spp' => $param));
+        if($hapus){
+            echo '<script>alert("data berhasil dihapus");window.history.back();</script>';
+        }else{
+            echo '<script>alert("data gagal dihapus");window.history.back();</script>';
         }
     }
     

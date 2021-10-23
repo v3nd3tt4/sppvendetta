@@ -33,7 +33,7 @@
                             <tr>
                                 <td ><?php echo $i ?>.</td>
                                 <td ><?php echo $row->nis; ?></td>
-                                <td ><?php echo $row->nama_siswa; ?></td>
+                                <td ><a href="<?=base_url('siswa/tunggakan/'. $row->id_siswa)?>" target="_blank"><?php echo $row->nama_siswa; ?></a></td>
                                 <td ><?php echo $row->nama_kelas; ?></td>
                                 <td>
                                     <a class="btn btn-success btn-xs" href="<?php echo base_url('siswa/edit/' . $row->id_siswa); ?>" ><span class="glyphicon glyphicon-edit"></span></a>

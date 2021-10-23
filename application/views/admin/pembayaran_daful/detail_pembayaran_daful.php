@@ -49,8 +49,7 @@
       
       <!-- /.col-lg-12 -->
       <div class="col-md-12">
-        <h4>Daftar Siswa <button class="btn btn-success pull-right add_siswa_di_daful">Tambah siswa dalam transaksi ini</button></h4><hr/>
-
+        <h4>Daftar Siswa</h4><hr/>
         <div class="table-responsive">
          <table class="table table-stripped">
              <thead>
@@ -106,36 +105,3 @@
    </div>
 </div>
 </form>
-
-<!-- Modal -->
-<div id="modal_tambah_siswa_daful" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Tambah siswa di dalam transaksi ini</h4>
-      </div>
-      <div class="modal-body">
-        <form method="POST" action="<?=base_url()?>pembayaran_daful/store_siswa_dalam_transaksi">
-          <input type="hidden" name="id_set_daful" value="<?=$row_data->row()->id_set_daftar_ulang?>">
-          <div class="form-group">
-            <label>Siswa</label>
-            <select class="form-control" name="siswa" required>
-              <option value="">--pilih--</option>
-              <?php foreach($siswa_di_kelas->result() as $row_siswa){?>
-              <option value="<?=$row_siswa->id_siswa?>"><?=$row_siswa->nis?> - <?=$row_siswa->nama_siswa?></option>
-              <?php }?>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-success">Simpan</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
